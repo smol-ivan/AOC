@@ -40,6 +40,11 @@ impl Present {
         }
     }
 
+    fn volume(&self) -> u32 {
+        let volume = self.width * self.lenght * self.height;
+        volume
+    }
+
     fn surface_area(&self) -> u32 {
         let surface_area =
             2 * (self.width * self.lenght + self.height * self.lenght + self.height * self.width);
@@ -54,6 +59,7 @@ impl Present {
 
         extra
     }
+
     fn ribbon(&self) -> u32 {
         let mut dimensions = vec![self.width, self.lenght, self.height];
         dimensions.sort();
@@ -76,7 +82,11 @@ fn read_input_file() -> Vec<Present> {
                 .split('x')
                 .filter_map(|dimension| dimension.parse().ok())
                 .collect();
-            let present = Present::new(dimensions[0] as u32, dimensions[1] as u32, dimensions[2]);
+            let present = Present::new(
+                dimensions[0] as u32,
+                dimensions[1] as u32,
+                dimensions[2] as u32,
+            );
             present
         })
         .collect();
