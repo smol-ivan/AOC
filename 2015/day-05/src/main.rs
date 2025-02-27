@@ -5,6 +5,19 @@ fn main() {
     part_1(input.clone());
 }
 
+fn part_2(input: Vec<String>) {
+    let result: Vec<&String> = input.iter().filter(|word| verification_2(word)).collect();
+
+    println!("Toal de palabras mas bonitas -> {}", result.len());
+}
+
+fn verification_2(word: &String) -> bool {
+    // Main loop
+    for i in 0..word.len() {
+        todo!();
+    }
+}
+
 fn part_1(input: Vec<String>) {
     let result: Vec<&String> = input.iter().filter(|word| verification(word)).collect();
 
