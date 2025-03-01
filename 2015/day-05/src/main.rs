@@ -5,19 +5,6 @@ fn main() {
     part_1(input.clone());
 }
 
-fn part_2(input: Vec<String>) {
-    let result: Vec<&String> = input.iter().filter(|word| verification_2(word)).collect();
-
-    println!("Toal de palabras mas bonitas -> {}", result.len());
-}
-
-fn verification_2(word: &String) -> bool {
-    // Main loop
-    for i in 0..word.len() {
-        todo!();
-    }
-}
-
 fn part_1(input: Vec<String>) {
     let result: Vec<&String> = input.iter().filter(|word| verification(word)).collect();
 
@@ -25,16 +12,20 @@ fn part_1(input: Vec<String>) {
 }
 
 fn verification(word: &String) -> bool {
-    // Check for banned words after anything
-    if word.contains("ab") || word.contains("cd") || word.contains("pq") || word.contains("xy") {
-        return false;
-    }
-
     let mut vowels_pass = 0;
     let mut repeated_pass = false;
     let bytes = word.as_bytes();
 
     for i in 0..word.len() {
+        // search for banned words
+        if i < bytes.len() - 1 {
+            let word_bytes: [u8; 2] = [bytes[i], bytes[i + 1]];
+            match &word_bytes {
+                b"ab" | b"cd" | b"pq" | b"xy" => return false,
+                _ => {}
+            }
+        }
+
         // Contar las vocales
         if b"aeiou".contains(&bytes[i]) {
             match bytes[i] {
